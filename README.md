@@ -1,2 +1,2 @@
 # backend-challenge
-Go;MongoDB;Hexagonal ;gRPC;
+Go;MongoDB;Hexagonal;gRPC;
