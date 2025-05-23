@@ -11,5 +11,5 @@ type TokenService interface {
 }
 
 type AuthService interface {
-
+	Login(ctx context.Context, email string, password string) error
 }

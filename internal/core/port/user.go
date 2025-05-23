@@ -10,5 +10,5 @@ type UserRepository interface {
 }
 
 type UserService interface {
-
+	Register(ctx context.Context, user *domain.User) error
 }

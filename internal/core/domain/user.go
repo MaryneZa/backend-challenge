@@ -5,9 +5,9 @@ import (
 )
 
 type User struct {
-	ID			string
-	Name		string
-	Email 		string
-	Password	string
-	CreatedAt	time.Time
+	ID			string	
+	Name		string			`bson:"name"`
+	Email 		string			`bson:"email"`
+	Password	string			`bson:"password"`
+	CreatedAt	time.Time		`bson:"created_at"`
 }
