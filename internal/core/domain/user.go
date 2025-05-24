@@ -2,12 +2,13 @@ package domain
 
 import (
 	"time"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type User struct {
-	ID			string	
-	Name		string			`bson:"name"`
-	Email 		string			`bson:"email"`
-	Password	string			`bson:"password"`
-	CreatedAt	time.Time		`bson:"created_at"`
+	ID			bson.ObjectID	`bson:"_id" json:"id"`
+	Name		string			`bson:"name" json:"name"`
+	Email 		string			`bson:"email" json:"email"`
+	Password	string			`bson:"password" json:"password"`
+	CreatedAt	time.Time		`bson:"created_at" json:"created_at"`
 }
