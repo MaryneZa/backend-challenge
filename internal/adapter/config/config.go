@@ -8,6 +8,7 @@ import (
 
 type Container struct {
 	MongoDB *DB
+	JWTSecret string
 }
 
 type DB struct {
@@ -17,6 +18,8 @@ type DB struct {
 	User     string
 	Password string
 }
+
+
 
 func New() (*Container, error) {
 
@@ -29,11 +32,12 @@ func New() (*Container, error) {
 		User: os.Getenv("MONGO_USERNAME"),
 		Password: os.Getenv("MONGO_PASSWORD"),
 		Name: os.Getenv("MONGO_DATABASE"),
-		Port: os.Getenv("MONGO_POST"),
+		Port: os.Getenv("MONGO_PORT"),
 	}
 
 	return &Container{
 		MongoDB: mongoDB,
+		JWTSecret: os.Getenv("JWT_SECRETKEY"),
 	}, nil
 
 }
