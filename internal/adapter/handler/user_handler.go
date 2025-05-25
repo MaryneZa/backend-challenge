@@ -23,11 +23,16 @@ func (uh *UserHandler) Register(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
+		Email    string `json:"email" validate:"required,email"`
+		Password string `json:"password" validate:"required,min=8"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
+		return
+	}
+
+	if err := util.Validate.Struct(req); err != nil {
 		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
 		return
 	}
@@ -49,10 +54,15 @@ func (uh *UserHandler) GetUserByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		ID string `json:"id"`
+		ID string `json:"id" validate:"required"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
+		return
+	}
+
+	if err := util.Validate.Struct(req); err != nil {
 		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
 		return
 	}
@@ -76,13 +86,20 @@ func (uh *UserHandler) GetUserByEmail(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Email string `json:"email"`
+		Email string `json:"email" validate:"required,email"`
 	}
+
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
 		return
 	}
+
+	if err := util.Validate.Struct(req); err != nil {
+		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
+		return
+	}
+
 
 	user, err := uh.userService.FindByEmail(r.Context(), req.Email)
 	if err != nil {
@@ -121,13 +138,19 @@ func (uh *UserHandler) UpdateEmail(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Email string `json:"email"`
+		Email string `json:"email" validate:"required,email"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
 		return
 	}
+
+	if err := util.Validate.Struct(req); err != nil {
+		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
+		return
+	}
+
 
 	userID, ok := util.GetUserID(w, r)
 	if !ok {
@@ -153,10 +176,15 @@ func (uh *UserHandler) UpdateName(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Name string `json:"name"`
+		Name string `json:"name" validate:"required"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
+		return
+	}
+
+	if err := util.Validate.Struct(req); err != nil {
 		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
 		return
 	}
@@ -183,13 +211,19 @@ func (uh *UserHandler) DeleteByEmail(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Email string `json:"email"`
+		Email string `json:"email" validate:"required,email"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
 		return
 	}
+
+	if err := util.Validate.Struct(req); err != nil {
+		util.SendErrorResponse(w, "Invalid Request Body", http.StatusBadRequest)
+		return
+	}
+
 
 	if err := uh.userService.Delete(r.Context(), req.Email); err != nil {
 		util.SendErrorResponse(w, err.Error(), http.StatusInternalServerError)

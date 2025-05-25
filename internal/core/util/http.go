@@ -4,11 +4,15 @@ import (
 	"log"
 	"net/http"
 	"encoding/json"
+	"github.com/go-playground/validator/v10"
+
 )
 
 type ErrorResponse struct {
 	Message string
 }
+
+var Validate = validator.New()
 
 func SendSuccessResponse(w http.ResponseWriter, data map[string]interface{}) {
 	w.Header().Set("Content-Type", "application/json")
