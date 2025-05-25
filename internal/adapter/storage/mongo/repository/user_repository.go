@@ -66,6 +66,7 @@ func (ur *UserRepository) FindByEmail(ctx context.Context, email string) (*domai
 		if errors.Is(err, mongo.ErrNoDocuments) {
 			return nil, nil
 		}
+		return nil, err 
 	}
 	return &user, nil
 }

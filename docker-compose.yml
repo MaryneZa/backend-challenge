@@ -12,9 +12,22 @@ services:
       MONGO_INITDB_ROOT_USERNAME: rootuser
       MONGO_INITDB_ROOT_PASSWORD: rootpassword
       MONGO_INITDB_DATABASE: mydatabase
-      MONGO_INITDB_USERNAME: myusername
-      MONGO_INITDB_PASSWORD: mypassword
+    restart: unless-stopped
+  
+  test-mongodb:
+    image: mongo:latest
+    container_name: test-backend-challenge-mongodb
+    ports:
+      - "27021:27017"
+    volumes:
+      - test-backend_challenge_mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: rootuser
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_DATABASE: mydatabase
     restart: unless-stopped
 
 volumes:
   backend_challenge_mongodb_data:
+  test-backend_challenge_mongodb_data:
+
