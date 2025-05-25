@@ -130,7 +130,6 @@ func (uh *UserHandler) GetAllUsers(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// UpdateEmail(ctx context.Context, id bson.ObjectID, email string) error
 func (uh *UserHandler) UpdateEmail(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPatch {
 		util.SendErrorResponse(w, "Method Not Allowed", http.StatusMethodNotAllowed)
@@ -168,7 +167,6 @@ func (uh *UserHandler) UpdateEmail(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// UpdateName(ctx context.Context, id bson.ObjectID, name string) error
 func (uh *UserHandler) UpdateName(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPatch {
 		util.SendErrorResponse(w, "Method Not Allowed", http.StatusMethodNotAllowed)
