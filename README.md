@@ -7,6 +7,7 @@ Go;MongoDB;Hexagonal;gRPC;
 > - https://blog.me-idea.in.th/mongodb-docker-compose-up-ปุ๊บสร้าง-mongo-database-ปั๊บ-d27004a9fd78
 > - https://github.com/mongodb/mongo-go-driver
 > - https://www.mongodb.com/docs/drivers/go/current/usage-examples
+> - https://www.mongodb.com/docs/drivers/go/current/usage-examples/count/#std-label-golang-count-usage-example
 > - `docker exec -it backend-challenge-mongodb mongosh -u rootuser -p rootpassword`
 
 > Architecture

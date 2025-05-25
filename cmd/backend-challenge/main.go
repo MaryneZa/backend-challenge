@@ -19,6 +19,9 @@ func main() {
 	}
 
 	client, db, err := mongo.ConnectMongoDB(config.MongoDB)
+
+	mongo.UserCountLogging(db)
+
 	if err != nil {
 		fmt.Println("MongoDB connection error:", err)
 		panic(err)
