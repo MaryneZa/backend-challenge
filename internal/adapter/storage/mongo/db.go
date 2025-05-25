@@ -51,3 +51,4 @@ func UserCountLogging(db *mongo.Database) {
 		}
 	}()
 }
+

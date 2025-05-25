@@ -63,11 +63,6 @@ func (uh *UserHandler) GetUserByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if user == nil {
-		util.SendErrorResponse(w, "user not found", http.StatusNotFound)
-		return
-	}
-
 	util.SendSuccessResponse(w, map[string]interface{}{
 		"user": user,
 	})
@@ -92,11 +87,6 @@ func (uh *UserHandler) GetUserByEmail(w http.ResponseWriter, r *http.Request) {
 	user, err := uh.userService.FindByEmail(r.Context(), req.Email)
 	if err != nil {
 		util.SendErrorResponse(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	if user == nil {
-		util.SendErrorResponse(w, "user not found", http.StatusNotFound)
 		return
 	}
 

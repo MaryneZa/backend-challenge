@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	"github.com/MaryneZa/backend-challenge/internal/core/domain"
 	"github.com/MaryneZa/backend-challenge/internal/core/port"
@@ -22,7 +21,9 @@ func NewUserService(userRepo port.UserRepository) port.UserService {
 
 func (us *UserService) Register(ctx context.Context, email string, password string) error {
 	user, err := us.FindByEmail(ctx, email)
-	if err != nil {
+
+
+	if err != nil && err.Error() != util.ErrUserNotFound.Error(){
 		return err
 	}
 
@@ -32,7 +33,7 @@ func (us *UserService) Register(ctx context.Context, email string, password stri
 
 	hashPassword, err := util.HashPassword(password)
 	if err != nil {
-		return fmt.Errorf("hash password failed: %s", err)
+		return errors.New("hash password failed:" + err.Error())
 	}
 	newUser := domain.User{
 		Email:    email,
@@ -52,10 +53,10 @@ func (us *UserService) FindByID(ctx context.Context, id string) (*domain.User, e
 	}
 	user, err := us.userRepo.FindByID(ctx, objectID)
 	if err != nil {
-		return nil, fmt.Errorf("failed to check existing user: %w", err)
+		return nil, errors.New("failed to check existing user:" + err.Error())
 	}
 	if user == nil {
-		return nil, nil
+		return nil, util.ErrUserNotFound
 	}
 	return user, nil
 }
@@ -63,10 +64,10 @@ func (us *UserService) FindByID(ctx context.Context, id string) (*domain.User, e
 func (us *UserService) FindByEmail(ctx context.Context, email string) (*domain.User, error) {
 	user, err := us.userRepo.FindByEmail(ctx, email)
 	if err != nil {
-		return nil, fmt.Errorf("failed to check existing user: %w", err)
+		return nil, errors.New("failed to check existing user:" + err.Error())
 	}
 	if user == nil {
-		return nil, nil
+		return nil, util.ErrUserNotFound
 	}
 	return user, nil
 }
@@ -82,7 +83,7 @@ func (us *UserService) UpdateEmail(ctx context.Context, id string, email string)
 	}
 	user, err := us.userRepo.FindByEmail(ctx, email)
 	if err != nil {
-		return fmt.Errorf("failed to check existing email: %w", err)
+		return errors.New("failed to check existing email:" + err.Error())
 	}
 
 	if user != nil {
@@ -92,9 +93,8 @@ func (us *UserService) UpdateEmail(ctx context.Context, id string, email string)
 		return errors.New("You’re already using this email.")
 	}
 
-
 	if err := us.userRepo.UpdateEmail(ctx, objectID, email); err != nil {
-		return fmt.Errorf("failed to update email: %w", err)
+		return errors.New("failed to update email:" + err.Error())
 	}
 
 	return nil
@@ -107,7 +107,7 @@ func (us *UserService) UpdateName(ctx context.Context, id string, name string) e
 	}
 	user, err := us.userRepo.FindByID(ctx, objectID)
 	if err != nil {
-		return fmt.Errorf("failed to check existing user: %w", err)
+		return errors.New("failed to check existing user:" + err.Error())
 	}
 
 	if user == nil {
@@ -115,7 +115,7 @@ func (us *UserService) UpdateName(ctx context.Context, id string, name string) e
 	}
 
 	if err := us.userRepo.UpdateName(ctx, objectID, name); err != nil {
-		return fmt.Errorf("failed to update name: %w", err)
+		return errors.New("failed to update name:" + err.Error())
 	}
 
 	return nil
@@ -124,7 +124,7 @@ func (us *UserService) Delete(ctx context.Context, email string) error {
 
 	user, err := us.userRepo.FindByEmail(ctx, email)
 	if err != nil {
-		return fmt.Errorf("failed to check existing user: %w", err)
+		return errors.New("failed to check existing user:" + err.Error())
 	}
 
 	if user == nil {
@@ -132,7 +132,7 @@ func (us *UserService) Delete(ctx context.Context, email string) error {
 	}
 
 	if err := us.userRepo.Delete(ctx, email); err != nil {
-		return fmt.Errorf("failed to delete user: %w", err)
+		return errors.New("failed to delete user:" + err.Error())
 	}
 
 	return nil
