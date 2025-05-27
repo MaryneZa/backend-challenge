@@ -247,6 +247,52 @@ Authorization: Bearer <jwt-token>
 ```
 
 ---
+## gRPC Endpoints
+
+### CreateUser
+
+**Request**
+
+```json
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+```
+
+**Response**
+
+```json
+{
+  "message": "success"
+}
+```
+
+### GetUser
+
+**Request**
+
+```json
+{
+  "email": "stacy@example.com"
+}
+```
+
+**Response**
+
+```json
+{
+    "user": {
+        "id": "...",
+        "name": "",
+        "email": "stacy@example.com",
+        "created_at": "..."
+    }
+}
+```
+
+
+---
 
 ## References
 
