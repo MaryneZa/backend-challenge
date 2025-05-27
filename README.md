@@ -246,6 +246,12 @@ Authorization: Bearer <jwt-token>
 
 ---
 
+```
+protoc --go_out=.\internal\adapter\grpc --go-grpc_out=.\internal\adapter\grpc .\internal\adapter\grpc\proto\user.proto
+```
+
+---
+
 ## References
 
 ### MongoDB
@@ -268,3 +274,8 @@ Authorization: Bearer <jwt-token>
 * [https://dev.to/bagashiz/building-restful-api-with-hexagonal-architecture-in-go-1mij](https://dev.to/bagashiz/building-restful-api-with-hexagonal-architecture-in-go-1mij)
 * [https://medium.com/@matiasvarela/hexagonal-architecture-in-go-cfd4e436faa3](https://medium.com/@matiasvarela/hexagonal-architecture-in-go-cfd4e436faa3)
 * [https://docs.mikelopster.dev/c/goapi-essential/chapter-7/intro](https://docs.mikelopster.dev/c/goapi-essential/chapter-7/intro)
+
+### gRPC
+
+* [https://pascalallen.medium.com/how-to-build-a-grpc-server-in-go-943f337c4e05](https://pascalallen.medium.com/how-to-build-a-grpc-server-in-go-943f337c4e05)
+* [https://medium.com/@titlebhoomtawathplinsutมาทำ-grpc-service-ด้วย-go-กัน-866d7452f5dd](https://medium.com/@titlebhoomtawathplinsutมาทำ-grpc-service-ด้วย-go-กัน-866d7452f5dd)

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "pb_backend_challenge/proto";
+option go_package = "/stub";
 
 service UserService {
   rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
@@ -21,7 +21,7 @@ message GetUserRequest {
 }
 
 message GetUserResponse {
-  repeated User user = 1;
+  User user = 1;
 }
 
 message User {
