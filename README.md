@@ -10,6 +10,8 @@
     ├───adapter
     │   ├───config
     │   ├───grpc
+    │   │   ├───proto
+    │   │   └───stub
     │   ├───handler
     │   ├───middleware
     │   └───storage
@@ -51,7 +53,7 @@ docker exec -it <container-name> mongosh -u <user> -p <password>
 go run cmd/rest-server/main.go
 ```
 
-* gRPC API Server (in progress):
+* gRPC API Server:
 
 ```bash
 go run cmd/grpc-server/main.go
@@ -242,12 +244,6 @@ Authorization: Bearer <jwt-token>
 {
   "message": "Delete change@example.com successfully!"
 }
-```
-
----
-
-```
-protoc --go_out=.\internal\adapter\grpc --go-grpc_out=.\internal\adapter\grpc .\internal\adapter\grpc\proto\user.proto
 ```
 
 ---
