@@ -252,6 +252,8 @@ Authorization: Bearer <jwt-token>
 ---
 ## gRPC Endpoints
 
+####  Import the .proto file from `internal\adapter\grpc\proto\user.proto`
+
 ### CreateUser
 
 **Request**
