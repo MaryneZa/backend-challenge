@@ -49,8 +49,9 @@ func (ur *UserRepository) Create(ctx context.Context, user *domain.User) error {
 
 func (ur *UserRepository) FindByID(ctx context.Context, id bson.ObjectID) (*domain.User, error) {
 	var user domain.User
+	opts := options.FindOne().SetProjection(bson.D{{"password", 0}})
 	filter := bson.D{{Key: "_id", Value: id}}
-	if err := ur.collection.FindOne(ctx, filter).Decode(&user); err != nil {
+	if err := ur.collection.FindOne(ctx, filter, opts).Decode(&user); err != nil {
 		if errors.Is(err, mongo.ErrNoDocuments) {
 			return nil, nil
 		}
@@ -61,8 +62,10 @@ func (ur *UserRepository) FindByID(ctx context.Context, id bson.ObjectID) (*doma
 
 func (ur *UserRepository) FindByEmail(ctx context.Context, email string) (*domain.User, error) {
 	var user domain.User
+	opts := options.FindOne().SetProjection(bson.D{{"password", 0}})
+
 	filter := bson.D{{Key: "email", Value: email}}
-	if err := ur.collection.FindOne(ctx, filter).Decode(&user); err != nil {
+	if err := ur.collection.FindOne(ctx, filter, opts).Decode(&user); err != nil {
 		if errors.Is(err, mongo.ErrNoDocuments) {
 			return nil, nil
 		}
@@ -72,7 +75,8 @@ func (ur *UserRepository) FindByEmail(ctx context.Context, email string) (*domai
 }
 
 func (ur *UserRepository) GetAllUser(ctx context.Context) ([]*domain.User, error) {
-	cursor, err := ur.collection.Find(ctx, bson.D{})
+	opts := options.Find().SetProjection(bson.D{{"password", 0}})
+	cursor, err := ur.collection.Find(ctx, bson.D{}, opts)
 	if err != nil {
 		return nil, err
 	}

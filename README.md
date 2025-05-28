@@ -135,7 +135,8 @@ Authorization: Bearer <jwt-token>
     "id": "...",
     "name": "",
     "email": "test@example.com",
-    "createdAt": "..."
+    "password": "",
+    "created_at": "..."
   }
 ]
 ```
@@ -159,7 +160,8 @@ Authorization: Bearer <jwt-token>
   "id": "...",
   "name": "",
   "email": "test@example.com",
-  "createdAt": "..."
+  "password": "",
+  "created_at": "..."
 }
 ```
 
@@ -182,7 +184,8 @@ Authorization: Bearer <jwt-token>
   "id": "...",
   "name": "",
   "email": "test@example.com",
-  "createdAt": "..."
+  "password": "",
+  "created_at": "..."
 }
 ```
 
@@ -264,7 +267,7 @@ Authorization: Bearer <jwt-token>
 
 ```json
 {
-  "message": "success"
+  "message": "successful"
 }
 ```
 
